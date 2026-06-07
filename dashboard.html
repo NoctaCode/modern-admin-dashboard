@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Admin Dashboard | Nocta-Code</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<script src="js/app.js"></script>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>AdminPro</span>
+        </div>
+
+        <ul class="menu">
+
+            <li class="active">
+                <a href="dashboard.html">
+                    <i class="fa-solid fa-house"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="crud.html">
+                    <i class="fa-solid fa-database"></i>
+                    CRUD Data
+                </a>
+            </li>
+
+            <li>
+                <a href="#" onclick="logout()">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main -->
+
+    <main class="main-content">
+
+        <!-- Navbar -->
+
+        <div class="topbar">
+
+            <h2>Dashboard Overview</h2>
+
+            <div class="topbar-actions">
+
+                <img
+                    src="https://i.pravatar.cc/100"
+                    class="profile-img"
+                    alt="Profile">
+
+            </div>
+
+        </div>
+
+        <!-- Stats -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="icon blue">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <h3>12,540</h3>
+                <p>Total Users</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="icon green">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+
+                <h3>8,245</h3>
+                <p>Orders</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="icon orange">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                </div>
+
+                <h3>$32,800</h3>
+                <p>Revenue</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="icon red">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+
+                <h3>+18%</h3>
+                <p>Growth</p>
+
+            </div>
+
+        </div>
+
+        <!-- Charts -->
+
+        <div class="chart-grid">
+
+            <div class="chart-card">
+
+                <h3>Revenue Analytics</h3>
+
+                <canvas id="revenueChart"></canvas>
+
+            </div>
+
+            <div class="chart-card">
+
+                <h3>User Growth</h3>
+
+                <canvas id="userChart"></canvas>
+
+            </div>
+
+        </div>
+
+        <!-- Table -->
+
+        <div class="table-card">
+
+            <h3>Recent Activities</h3>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Action</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>John Doe</td>
+                        <td>Created Order</td>
+                        <td>
+                            <span class="badge success">
+                                Success
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Emma</td>
+                        <td>Updated Product</td>
+                        <td>
+                            <span class="badge warning">
+                                Pending
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Michael</td>
+                        <td>Deleted Item</td>
+                        <td>
+                            <span class="badge danger">
+                                Failed
+                            </span>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script>
+
+const revenueChart =
+new Chart(
+document.getElementById("revenueChart"),
+{
+    type: "line",
+
+    data: {
+
+        labels: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun"
+        ],
+
+        datasets: [
+
+            {
+                label: "Revenue",
+
+                data: [
+                    1200,
+                    1900,
+                    3000,
+                    2500,
+                    4200,
+                    5000
+                ],
+
+                borderWidth: 3,
+
+                tension: .4
+            }
+
+        ]
+
+    }
+
+});
+
+const userChart =
+new Chart(
+document.getElementById("userChart"),
+{
+    type: "bar",
+
+    data: {
+
+        labels: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun"
+        ],
+
+        datasets: [
+
+            {
+                label: "Users",
+
+                data: [
+                    300,
+                    500,
+                    700,
+                    900,
+                    1200,
+                    1500
+                ]
+            }
+
+        ]
+
+    }
+
+});
+
+const darkBtn =
+document.getElementById("darkModeBtn");
+
+darkBtn.addEventListener(
+"click",
+() => {
+
+    document.body.classList.toggle(
+        "dark-mode"
+    );
+
+});
+</script>
+
+</body>
+
+</html>

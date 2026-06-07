@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Data - Admin Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        rel="stylesheet">
+</head>
+
+<body>
+
+<div class="crud-container">
+
+    <div class="crud-header">
+
+        <h2>
+            <i class="fa-solid fa-database"></i>
+            CRUD Data Management
+        </h2>
+
+        <a href="dashboard.html" class="back-btn">
+            Back Dashboard
+        </a>
+
+    </div>
+
+    <!-- Form -->
+
+    <div class="crud-card">
+
+        <h3>Add New Data</h3>
+
+        <form id="crudForm">
+
+            <div class="form-row">
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Name"
+                    required>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Email"
+                    required>
+
+                <button type="submit">
+                    Add Data
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- Search -->
+
+    <div class="crud-card">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search user...">
+
+    </div>
+
+    <!-- Table -->
+
+    <div class="crud-card">
+
+        <table id="dataTable">
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>1</td>
+                    <td>John Doe</td>
+                    <td>john@gmail.com</td>
+
+                    <td>
+
+                        <button
+                            class="edit-btn">
+                            Edit
+                        </button>
+
+                        <button
+                            class="delete-btn">
+                            Delete
+                        </button>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>Emma Watson</td>
+                    <td>emma@gmail.com</td>
+
+                    <td>
+
+                        <button
+                            class="edit-btn">
+                            Edit
+                        </button>
+
+                        <button
+                            class="delete-btn">
+                            Delete
+                        </button>
+
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+
+const crudForm =
+document.getElementById(
+"crudForm"
+);
+
+const tableBody =
+document.querySelector(
+"#dataTable tbody"
+);
+
+let currentId = 3;
+
+crudForm.addEventListener(
+"submit",
+function(e){
+
+    e.preventDefault();
+
+    const name =
+    document.getElementById(
+    "name"
+    ).value;
+
+    const email =
+    document.getElementById(
+    "email"
+    ).value;
+
+    const row =
+    document.createElement(
+    "tr"
+    );
+
+    row.innerHTML = `
+        <td>${currentId++}</td>
+        <td>${name}</td>
+        <td>${email}</td>
+        <td>
+            <button class="edit-btn">
+                Edit
+            </button>
+
+            <button class="delete-btn">
+                Delete
+            </button>
+        </td>
+    `;
+
+    tableBody.appendChild(
+        row
+    );
+
+    crudForm.reset();
+
+});
+
+document.addEventListener(
+"click",
+function(e){
+
+    if(
+        e.target.classList.contains(
+            "delete-btn"
+        )
+    ){
+
+        e.target
+        .parentElement
+        .parentElement
+        .remove();
+
+    }
+
+    if(
+        e.target.classList.contains(
+            "edit-btn"
+        )
+    ){
+
+        const row =
+        e.target
+        .parentElement
+        .parentElement;
+
+        const newName =
+        prompt(
+            "Edit Name",
+            row.children[1]
+            .innerText
+        );
+
+        const newEmail =
+        prompt(
+            "Edit Email",
+            row.children[2]
+            .innerText
+        );
+
+        if(newName)
+            row.children[1]
+            .innerText =
+            newName;
+
+        if(newEmail)
+            row.children[2]
+            .innerText =
+            newEmail;
+
+    }
+
+});
+
+const searchInput =
+document.getElementById(
+"searchInput"
+);
+
+searchInput.addEventListener(
+"keyup",
+function(){
+
+    const filter =
+    this.value
+    .toLowerCase();
+
+    const rows =
+    tableBody.querySelectorAll(
+        "tr"
+    );
+
+    rows.forEach(row => {
+
+        const text =
+        row.innerText
+        .toLowerCase();
+
+        row.style.display =
+        text.includes(filter)
+        ? ""
+        : "none";
+
+    });
+
+});
+
+</script>
+
+</body>
+
+</html>S
